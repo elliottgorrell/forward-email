@@ -101,6 +101,12 @@ class ForwardEmail {
         ...config.smtp,
         ...this.ssl
       },
+      redis: {
+        host: "127.0.0.1",
+        port: "6379",
+        options: {},
+        ...config.redis
+      },
       limiter: { ...config.limiter },
       ssl: this.ssl,
       exchanges: ['mx1.forwardemail.net', 'mx2.forwardemail.net'],
@@ -110,7 +116,7 @@ class ForwardEmail {
 
     // setup rate limiting with redis
     this.limiter = {
-      db: redis.createClient(),
+      db: redis.createClient(this.config.redis.port, this.config.redis.host),
       max: 100, // max requests within duration
       duration: ms('1h'),
       ...this.config.limiter

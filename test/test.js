@@ -338,6 +338,14 @@ test('rejects an email to no-reply@forwardemail.net', async t => {
   });
 });
 
+test('Can set custom redis config', async t => {
+  (async () => {
+  const ForwardEmail2 = new ForwardEmail({redis:{host: 'localhost', port: '6666'}});
+  t.is(ForwardEmail2.config.redis.host, 'localhost');
+  t.is(ForwardEmail2.config.redis.port, '6666');
+  });
+})
+
 // eslint-disable-next-line ava/no-todo-test
 test.todo('rejects invalid dkim signature');
 // eslint-disable-next-line ava/no-todo-test
