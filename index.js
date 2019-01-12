@@ -102,7 +102,7 @@ class ForwardEmail {
         ...this.ssl
       },
       redis: {
-        host: "redis",
+        host: "localhost",
         port: "6379",
         options: {},
         ...config.redis
